@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.image-radius{
+    border-radius:1rem;
+}
+
+.header-bg {
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.808), rgba(0, 0, 0, 0.808)), 
+        url("https://images.pexels.com/photos/18797221/pexels-photo-18797221/free-photo-of-rally-bmw-e30-on-dirt-road.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.tilted-div {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #3498db, #8e44ad);
+    clip-path: polygon(0 0, 100% 0, 100% 69%, 0 100%);
+}
