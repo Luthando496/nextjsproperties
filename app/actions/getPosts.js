@@ -9,7 +9,7 @@ const getPosts = async () => {
     
     const posts = await Post.find({}).populate("author");
     if(!posts) return [];
-    console.log(posts)
+    // console.log(posts)
     return posts;
 }
 

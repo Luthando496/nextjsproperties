@@ -1,13 +1,37 @@
 import getSinglePost from '@/app/actions/getSinglePost';
-import Navbar from '@/components/Navabar'
 import connectDB from '@/utils/connectDB'
 import React from 'react'
+
+export async function generateMetadata({ params }) {
+  try {
+    const { id } = params; 
+
+    const post = await getSinglePost(id); 
+
+    if (!post) {
+      return {
+        title: "Post Not Found",
+      };
+    }
+
+    return {
+      title: post.title || "Default Title", // Fallback to a default title
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+
+    return {
+      title: "Error Loading Post", // Handle errors gracefully
+    };
+  }
+}
+
 
 const SinglePost = async({params}) => {
   const {id} = await params;
   await connectDB();
   const post = await getSinglePost(id);
-  console.log("SINGLE POST",post)
+  // console.log("SINGLE POST",post)
 
   return (
     <>
@@ -20,7 +44,7 @@ const SinglePost = async({params}) => {
         </div>
           <h1 className="text-4xl font-bold leading-[1.3] text-white text-center">{post.title}</h1>
           <div className="flex gap-4 mt-2 justify-center items-start">
-            <span className="text-sm text-white font-semibold">Luthando</span>
+            <span className="text-sm text-white font-semibold">{post?.author?.name}</span>
             <span className="text-sm text-white font-semibold">March 25, 2024</span>
             <span className="text-sm text-white font-semibold">no comments</span>
           </div>

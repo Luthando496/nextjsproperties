@@ -14,7 +14,7 @@ export const newUser = async () => {
   });
 
 
-    console.log(user);
+    // console.log(user);
 };
 
 

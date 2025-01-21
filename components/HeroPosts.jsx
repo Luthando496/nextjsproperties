@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const HeroPosts = async() => {
     const posts = await getPosts();
-    console.log(posts)
+    // console.log(posts)
   return (
     <>
       <h1 className="text-center text-3xl font-bold my-10">Latest Posts</h1>

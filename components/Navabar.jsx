@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <header className="w-full bg-[#900024] py-5 flex justify-between px-10 items-center">
       {/* Logo */}
-      <h1 className="text-3xl text-white font-bold">Next.js Blog</h1>
+      <Link href="/" className="text-3xl text-white font-bold">Next.js Blog</Link>
 
       {/* Navigation */}
       <ul className="flex items-center gap-6 pr-10">
@@ -66,19 +66,19 @@ const Navbar = () => {
               href="/posts"
               className="text-gray-700 hover:text-[#900024] hover:border-b-2  text-xl py-2 block"
             >
-              Latest Posts
+              Ferrari
             </Link>
             <Link
               href="/categories"
               className="text-gray-700 hover:text-[#900024] hover:border-b-2  text-xl py-2 block"
             >
-              Categories
+              Mercedes
             </Link>
             <Link
               href="/contact"
               className="text-gray-700 hover:text-[#900024] hover:border-b-2  text-xl py-2 block"
             >
-              Contact Us
+              Aston Martin
             </Link>
           </div>
         </li>

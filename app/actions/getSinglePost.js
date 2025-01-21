@@ -9,7 +9,6 @@ const getSinglePost = async (id) => {
     
     const post = await Post.findById(id).populate("author");
     if(!post) return null;
-    console.log(post,"SINGLE POST")
     return post;
 }
 
