@@ -4,7 +4,7 @@ import React from 'react'
 
 export async function generateMetadata({ params }) {
   try {
-    const { id } = params; 
+    const { id } = await params; 
 
     const post = await getSinglePost(id); 
 
@@ -31,7 +31,7 @@ const SinglePost = async({params}) => {
   const {id} = await params;
   await connectDB();
   const post = await getSinglePost(id);
-  // console.log("SINGLE POST",post)
+  console.log("SINGLE POST",post)
 
   return (
     <>
@@ -45,8 +45,7 @@ const SinglePost = async({params}) => {
           <h1 className="text-4xl font-bold leading-[1.3] text-white text-center">{post.title}</h1>
           <div className="flex gap-4 mt-2 justify-center items-start">
             <span className="text-sm text-white font-semibold">{post?.author?.name}</span>
-            <span className="text-sm text-white font-semibold">March 25, 2024</span>
-            <span className="text-sm text-white font-semibold">no comments</span>
+            <span className="text-sm text-white font-semibold">{new Date(post.createdAt).getDate()} , {new Date(post.createdAt).getFullYear()} {" "}</span>
           </div>
         </div>
       </div>

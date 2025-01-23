@@ -21,3 +21,12 @@
     background: linear-gradient(135deg, #3498db, #8e44ad);
     clip-path: polygon(0 0, 100% 0, 100% 69%, 0 100%);
 }
+
+
+/* .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } */
