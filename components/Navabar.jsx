@@ -31,7 +31,7 @@ const Navbar = () => {
       </Link>
 
       {/* Navigation */}
-      <ul className="flex items-center gap-6 pr-10">
+      <ul className="hidden lg:flex items-center gap-6 pr-10">
         {/* Home with Dropdown */}
         <li className="relative group">
           <Link

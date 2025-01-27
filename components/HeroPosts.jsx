@@ -26,7 +26,7 @@ const HeroPosts = async() => {
               className="shadow-2xl rounded-lg absolute -top-28 left-50"
             />
             <div className="w-full flex flex-col space-y-5">
-              <Link href={`/posts/${post._id}`} className="text-2xl text-center font-semibold text-black">
+              <Link href={`/posts/${post.title.toLowerCase().split(" ").join("-")}`} className="text-2xl text-center font-semibold text-black">
                 {post.title}
               </Link>
               <div dangerouslySetInnerHTML={{__html:post.description}} className="text-zinc-800">

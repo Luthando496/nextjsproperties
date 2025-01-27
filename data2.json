@@ -5,7 +5,7 @@
         "postImage": "/images/ai-healthcare.jpg",
         "tags": ["AI", "Healthcare", "Technology", "Medicine", "Innovation"],
         "category": "Technology",
-        "author": "507f1f77bcf86cd799439011"
+        "author": "678abc99819fde96a4dd70e6"
       },
       {
         "title": "Sustainable Agriculture: A Path to Food Security",
@@ -13,7 +13,7 @@
         "postImage": "/images/sustainable-farming.jpg",
         "tags": ["Agriculture", "Sustainability", "Food Security", "Farming", "Environment"],
         "category": "Environment",
-        "author": "507f1f77bcf86cd799439012"
+        "author": "678abc99819fde96a4dd70e6"
       },
       {
         "title": "The Evolution of Remote Work Culture",
@@ -21,7 +21,7 @@
         "postImage": "/images/remote-work.jpg",
         "tags": ["Remote Work", "Business", "Technology", "Culture", "Future of Work"],
         "category": "Business",
-        "author": "507f1f77bcf86cd799439013"
+        "author": "678abc99819fde96a4dd70e6"
       },
       {
         "title": "Modern Architecture: Blending Form and Function",
@@ -29,7 +29,7 @@
         "postImage": "/images/modern-architecture.jpg",
         "tags": ["Architecture", "Design", "Sustainability", "Innovation", "Urban Planning"],
         "category": "Architecture",
-        "author": "507f1f77bcf86cd799439014"
+        "author": "678abc99819fde96a4dd70e6"
       },
       {
         "title": "The Renaissance of Classical Music in the Digital Age",
@@ -37,7 +37,7 @@
         "postImage": "/images/classical-music.jpg",
         "tags": ["Music", "Classical", "Culture", "Digital", "Performance"],
         "category": "Arts",
-        "author": "507f1f77bcf86cd799439015"
+        "author": "678abc99819fde96a4dd70e6"
       }
 ]
 
