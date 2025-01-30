@@ -7,10 +7,16 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pop: ['Poppins', "sans-serif"],
+        roboto: ["Roboto", "serif"],
+        play: ["Playfair Display", "serif"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      
     },
   },
   plugins: [],

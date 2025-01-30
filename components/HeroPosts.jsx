@@ -1,4 +1,5 @@
 import getPosts from "@/app/actions/getPosts";
+import { tagNames } from "@/utils/tagNames";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,240 +12,42 @@ const HeroPosts = async() => {
     // console.log(posts)
   return (
     <>
-      <h1 className="text-center text-3xl font-bold my-10">Latest Posts</h1>
-      <main className="grid grid-cols-3 relative lg:grid-cols-3 gap-20 px-20 bg-white py-36">
+      <h1 className="text-center text-3xl font-bold mt-16">Latest Posts</h1>
+      <main className="grid grid-cols-3 relative lg:grid-cols-3 gap-20 px-20 bg-white py-10">
         {/* left section */}
-        <section className="w-full space-y-48  col-span-2">
+        <section className="w-full space-y-5  col-span-2">
           {/* single post */}
           {posts.length > 0 ? posts.map((post) => (
-            <div key={post._id} className=" relative h-auto shadow-sm shadow-black/60 items-center gap-4 p-4 bg-gray-100 rounded-sm">
-            <Image
+            <div
+            key={post._id}
+            className="w-full overflow-hidden flex bg-white  shadow-md hover:rounded-b-lg hover:shadow-2xl hover:-translate-y-2 duration-500"
+          >
+            <img
               src={post.postImage}
-              alt="car"
-              width={190}
-              height={290}
-              className="shadow-2xl rounded-lg absolute -top-28 left-50"
+              alt="post-image"
+              className="h-[266px] object-cover w-[240px] flex-[25%]"
+              // fill
             />
-            <div className="w-full flex flex-col space-y-5">
-              <Link href={`/posts/${post.title.toLowerCase().split(" ").join("-")}`} className="text-2xl text-center font-semibold text-black">
+            <div className="flex flex-col flex-[75%] space-y-6 justify-center py-3 px-2 items-center">
+            <h1 className="text-xl text-center py-2">
+              <Link
+                href={`/posts/${tagNames(post.title)}`}
+                className="text-[#900024] font-play"
+              >
                 {post.title}
               </Link>
-              <div dangerouslySetInnerHTML={{__html:post.description}} className="text-zinc-800">
-                {/* {} */}
-              </div>
+              {/* Exploring the Beauty of Nature */}
+            </h1>
+            <div
+              dangerouslySetInnerHTML={{ __html: post.description }}
+              className="line-clamp-6 pb-[2px]  font-roboto text-center overflow-hidden px-3 "
+            ></div>
 
-              <div className="flex gap-8 items-center text-sm my-4">
-                <span className="text-yellow-800">Author : Luthando Dihs</span>
-                <span className="text-yellow-800">Date : 12 December 2024</span>
-                <span className="text-yellow-800">Category : cars</span>
-                <p className="flex gap-2">tags :
-                   {post.tags.map((tag,index)=>(
-                        <span key={index} className="text-yellow-800">{tag}</span>
-                    ))}
-                </p>
-              </div>
             </div>
           </div>
           )) : <h1>No Posts</h1>}
           
-          {/* END POST */}
-          {/* single post */}
-          <div className=" relative h-auto shadow-sm shadow-black/60 items-center gap-4 p-4 bg-gray-100 rounded-sm">
-            <Image
-              src="https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="car"
-              width={190}
-              height={290}
-              className="shadow-2xl  absolute -top-28 left-50"
-            />
-            <div className="w-full flex flex-col space-y-5">
-              <h3 className="text-2xl text-center font-semibold text-black">
-                Cars that Are Not Reliable
-              </h3>
-              <p className="text-zinc-800">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt, quos? Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Doloremque ea harum id, amet, eaque quia
-                voluptatum quos minima eveniet, quaerat iure dolores quam
-                quisquam earum mollitia? Recusandae vero tenetur, fugiat nobis
-                suscipit atque hic sit fuga aliquid iste est aliquam praesentium
-                quas sint, neque, dicta accusamus rerum velit magnam?
-                Praesentium, pariatur ipsa. Exercitationem explicabo tempora
-                necessitatibus repudiandae recusandae...
-              </p>
-
-              <div className="flex gap-8 items-center text-sm my-4">
-                <span className="text-yellow-800">Author : Luthando Dihs</span>
-                <span className="text-yellow-800">Date : 12 December 2024</span>
-                <span className="text-yellow-800">Category : cars</span>
-              </div>
-            </div>
-          </div>
-          {/* END POST */}
-          {/* single post */}
-          <div className=" relative h-auto shadow-sm shadow-black/60 items-center gap-4 p-4 bg-gray-100 rounded-sm">
-            <Image
-              src="https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="car"
-              width={190}
-              height={290}
-              className="shadow-2xl  absolute -top-28 left-50"
-            />
-            <div className="w-full flex flex-col space-y-5">
-              <h3 className="text-2xl text-center font-semibold text-black">
-                Cars that Are Not Reliable
-              </h3>
-              <p className="text-zinc-800">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt, quos? Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Doloremque ea harum id, amet, eaque quia
-                voluptatum quos minima eveniet, quaerat iure dolores quam
-                quisquam earum mollitia? Recusandae vero tenetur, fugiat nobis
-                suscipit atque hic sit fuga aliquid iste est aliquam praesentium
-                quas sint, neque, dicta accusamus rerum velit magnam?
-                Praesentium, pariatur ipsa. Exercitationem explicabo tempora
-                necessitatibus repudiandae recusandae...
-              </p>
-
-              <div className="flex gap-8 items-center text-sm my-4">
-                <span className="text-yellow-800">Author : Luthando Dihs</span>
-                <span className="text-yellow-800">Date : 12 December 2024</span>
-                <span className="text-yellow-800">Category : cars</span>
-              </div>
-            </div>
-          </div>
-          {/* END POST */}
-          {/* single post */}
-          <div className=" relative h-auto shadow-sm shadow-black/60 items-center gap-4 p-4 bg-gray-100 rounded-sm">
-            <Image
-              src="https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="car"
-              width={190}
-              height={290}
-              className="shadow-2xl  absolute -top-28 left-50"
-            />
-            <div className="w-full flex flex-col space-y-5">
-              <h3 className="text-2xl text-center font-semibold text-black">
-                Cars that Are Not Reliable
-              </h3>
-              <p className="text-zinc-800">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt, quos? Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Doloremque ea harum id, amet, eaque quia
-                voluptatum quos minima eveniet, quaerat iure dolores quam
-                quisquam earum mollitia? Recusandae vero tenetur, fugiat nobis
-                suscipit atque hic sit fuga aliquid iste est aliquam praesentium
-                quas sint, neque, dicta accusamus rerum velit magnam?
-                Praesentium, pariatur ipsa. Exercitationem explicabo tempora
-                necessitatibus repudiandae recusandae...
-              </p>
-
-              <div className="flex gap-8 items-center text-sm my-4">
-                <span className="text-yellow-800">Author : Luthando Dihs</span>
-                <span className="text-yellow-800">Date : 12 December 2024</span>
-                <span className="text-yellow-800">Category : cars</span>
-              </div>
-            </div>
-          </div>
-          {/* END POST */}
-          {/* single post */}
-          <div className=" relative h-auto shadow-sm shadow-black/60 items-center gap-4 p-4 bg-gray-100 rounded-sm">
-            <Image
-              src="https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="car"
-              width={190}
-              height={290}
-              className="shadow-2xl  absolute -top-28 left-50"
-            />
-            <div className="w-full flex flex-col space-y-5">
-              <h3 className="text-2xl text-center font-semibold text-black">
-                Cars that Are Not Reliable
-              </h3>
-              <p className="text-zinc-800">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt, quos? Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Doloremque ea harum id, amet, eaque quia
-                voluptatum quos minima eveniet, quaerat iure dolores quam
-                quisquam earum mollitia? Recusandae vero tenetur, fugiat nobis
-                suscipit atque hic sit fuga aliquid iste est aliquam praesentium
-                quas sint, neque, dicta accusamus rerum velit magnam?
-                Praesentium, pariatur ipsa. Exercitationem explicabo tempora
-                necessitatibus repudiandae recusandae...
-              </p>
-
-              <div className="flex gap-8 items-center text-sm my-4">
-                <span className="text-yellow-800">Author : Luthando Dihs</span>
-                <span className="text-yellow-800">Date : 12 December 2024</span>
-                <span className="text-yellow-800">Category : cars</span>
-              </div>
-            </div>
-          </div>
-          {/* END POST */}
-          {/* single post */}
-          <div className=" relative h-auto shadow-sm shadow-black/60 items-center gap-4 p-4 bg-gray-100 rounded-sm">
-            <Image
-              src="https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="car"
-              width={190}
-              height={290}
-              className="shadow-2xl  absolute -top-28 left-50"
-            />
-            <div className="w-full flex flex-col space-y-5">
-              <h3 className="text-2xl text-center font-semibold text-black">
-                Cars that Are Not Reliable
-              </h3>
-              <p className="text-zinc-800">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt, quos? Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Doloremque ea harum id, amet, eaque quia
-                voluptatum quos minima eveniet, quaerat iure dolores quam
-                quisquam earum mollitia? Recusandae vero tenetur, fugiat nobis
-                suscipit atque hic sit fuga aliquid iste est aliquam praesentium
-                quas sint, neque, dicta accusamus rerum velit magnam?
-                Praesentium, pariatur ipsa. Exercitationem explicabo tempora
-                necessitatibus repudiandae recusandae...
-              </p>
-
-              <div className="flex gap-8 items-center text-sm my-4">
-                <span className="text-yellow-800">Author : Luthando Dihs</span>
-                <span className="text-yellow-800">Date : 12 December 2024</span>
-                <span className="text-yellow-800">Category : cars</span>
-              </div>
-            </div>
-          </div>
-          {/* END POST */}
-          {/* single post */}
-          <div className=" relative h-auto shadow-sm shadow-black/60 items-center gap-4 p-4 bg-gray-100 rounded-sm">
-            <Image
-              src="https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="car"
-              width={190}
-              height={290}
-              className="shadow-2xl  absolute -top-28 left-50"
-            />
-            <div className="w-full flex flex-col space-y-5">
-              <h3 className="text-2xl text-center font-semibold text-black">
-                Cars that Are Not Reliable
-              </h3>
-              <p className="text-zinc-800">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt, quos? Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Doloremque ea harum id, amet, eaque quia
-                voluptatum quos minima eveniet, quaerat iure dolores quam
-                quisquam earum mollitia? Recusandae vero tenetur, fugiat nobis
-                suscipit atque hic sit fuga aliquid iste est aliquam praesentium
-                quas sint, neque, dicta accusamus rerum velit magnam?
-                Praesentium, pariatur ipsa. Exercitationem explicabo tempora
-                necessitatibus repudiandae recusandae...
-              </p>
-
-              <div className="flex gap-8 items-center text-sm my-4">
-                <span className="text-yellow-800">Author : Luthando Dihs</span>
-                <span className="text-yellow-800">Date : 12 December 2024</span>
-                <span className="text-yellow-800">Category : cars</span>
-              </div>
-            </div>
-          </div>
+  
           {/* END POST */}
         </section>
         {/* right section  sticky top-36 z-10*/}
@@ -262,11 +65,11 @@ const HeroPosts = async() => {
 
           <h2 className="text-4xl font-bold text-red-600">Recent Posts</h2>
           <div className="flex flex-col mt-6 gap-3">
-            <h3 className="text-xl text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">Lorem ipsum dolor sit amet.</h3>
-            <h3 className="text-xl text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">Lorem ipsum dolor sit amet.</h3>
-            <h3 className="text-xl text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">Lorem ipsum dolor sit amet.</h3>
-            <h3 className="text-xl text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">Lorem ipsum dolor sit amet.</h3>
-            <h3 className="text-xl text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">Lorem ipsum dolor sit amet.</h3>
+            {/* single post */}
+            {posts.length > 0 ? posts.map((post) => (
+              <Link key={post._id} href={`/posts/${tagNames(post.title)}`} className="text-lg text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">{post.title}</Link>
+            )) : <h1>No Posts</h1>}
+            
           </div>
         </aside>
         {/* ASIDES */}

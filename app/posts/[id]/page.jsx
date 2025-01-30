@@ -1,11 +1,13 @@
 import getSinglePost from "@/app/actions/getSinglePost";
 import connectDB from "@/utils/connectDB";
 import React from "react";
-import Link from 'next/link'
+import Link from "next/link";
+import Post from "@/models/Post";
+import Carousel from "@/components/Carousel";
 
 export async function generateMetadata({ params }) {
   try {
-    const { id } = await params;
+    const { id } = params;
 
     const post = await getSinglePost(id);
 
@@ -16,38 +18,47 @@ export async function generateMetadata({ params }) {
     }
 
     return {
-      title: post.title || "Default Title", // Fallback to a default title
+      title: post.title || "Default Title",
     };
   } catch (error) {
     console.error("Error generating metadata:", error);
 
     return {
-      title: "Error Loading Post", // Handle errors gracefully
+      title: "Error Loading Post",
     };
   }
 }
 
 const SinglePost = async ({ params }) => {
-  const { id } = await params;
+  const { id } = params;
   await connectDB();
   const post = await getSinglePost(id);
-
-  if(!post){
-    return <div>Post not found</div>
+  const posts = await Post.find({
+    tags: { $regex: post.category, $options: "i" },
+  }).populate("author");
+  if (!post) {
+    return <div>Post not found</div>;
   }
 
-
-
-  
   return (
     <>
-     <div className="py-5 pl-10 bg-black text-white w-full flex gap-6 items-start">
-        <Link href='/' className="group overflow-hidden  text-lg font-serif relative  hover:border-none pb-1 flex gap-3">Home  <span className="">/</span>  
-        <span className='group-hover:-translate-x-full translate-x-0 duration-500  absolute bottom-0 w-[88%] h-[1px] bg-white'></span></Link>
-        <Link href='/categories' className="group overflow-hidden  text-lg font-serif relative  hover:border-none pb-1 flex gap-3">{post.category}  <span className="">/</span>  
-        <span className='group-hover:-translate-x-full translate-x-0 duration-500  absolute bottom-0 w-[88%] h-[1px] bg-white'></span></Link>
-        <span className="text-lg"> Thriving in Urban Environments: Tips for City Living</span>
-    </div>
+      <div className="py-5 pl-10 bg-black text-white w-full flex gap-6 items-start">
+        <Link
+          href="/"
+          className="group overflow-hidden  text-lg font-serif relative  hover:border-none pb-1 flex gap-3"
+        >
+          Home <span className="">/</span>
+          <span className="group-hover:-translate-x-full translate-x-0 duration-500  absolute bottom-0 w-[88%] h-[1px] bg-white"></span>
+        </Link>
+        <Link
+          href={`/categories/${post.category}`}
+          className="group overflow-hidden  text-lg font-serif relative  hover:border-none pb-1 flex gap-3"
+        >
+          {post.category} <span className="">/</span>
+          <span className="group-hover:-translate-x-full translate-x-0 duration-500  absolute bottom-0 w-[88%] h-[1px] bg-white"></span>
+        </Link>
+        <span className="text-lg"> {post.title}</span>
+      </div>
       <section className="tilted-div py-32 mb-20 ">
         <div className="flex justify-center items-center container mx-auto h-full">
           <div className="w-1/2">
@@ -83,10 +94,7 @@ const SinglePost = async ({ params }) => {
       </section>
 
       <section className="flex items-center justify-center mx-auto mt-[14rem] mb-10">
-        <div
-          dangerouslySetInnerHTML={{ __html: post.description }}
-          className="container lg:w-[50rem]"
-        ></div>
+        <div className='px-[15rem]' dangerouslySetInnerHTML={{ __html: post.description }}></div>
       </section>
     </>
   );

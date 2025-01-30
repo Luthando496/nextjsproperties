@@ -1,9 +1,11 @@
 import Post from '@/models/Post';
+import connectDB from '@/utils/connectDB';
 import { tagNames } from '@/utils/tagNames';
 import Link from 'next/link'
 import React from 'react'
 
 const SingleCategoryPage = async({params}) => {
+  await connectDB();
   const { category } = await params;
   const caseInsensitiveCategory = new RegExp(category, 'i');
   const postsWithCategory = await Post.find({
@@ -25,8 +27,8 @@ const SingleCategoryPage = async({params}) => {
     <>
       <section className="w-full py-14 bg-[#900024]">
         <div className="flex justify-center items-center">
-          <h1 className="text-4xl text-white">
-            Category : <span className=" font-serif">{category}</span>
+          <h1 className="text-4xl text-white font-play uppercase tracking-widest">
+            Category : <span className="capitalize font-serif">{category}</span>
           </h1>
         </div>
       </section>
@@ -47,9 +49,9 @@ const SingleCategoryPage = async({params}) => {
               </Link>
               
             </h1>
-            <d  dangerouslySetInnerHTML={{__html:post.description}} className="line-clamp-6 text-center overflow-hidden px-3 pb-4">
+            <div  dangerouslySetInnerHTML={{__html:post.description}} className="line-clamp-[4] text-center overflow-hidden px-3 pb-1">
               
-            </d>
+            </div>
           </div>
           ))}
           

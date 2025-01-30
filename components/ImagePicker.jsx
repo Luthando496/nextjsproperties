@@ -31,7 +31,7 @@ const ImagePicker = ({ setHandleImage, location }) => {
       formData.append("file", image);
       formData.append("upload_preset", "my_preset"); // Replace with your Cloudinary unsigned upload preset
       if (location === "user") formData.append("folder", "supabase_blog_users");
-      if (location === "post") formData.append("folder", "supabase_blog");
+      if (location === "post") formData.append("folder", "blog_posts_next");
 
       try {
         const response = await axios.post(
