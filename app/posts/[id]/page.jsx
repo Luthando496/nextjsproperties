@@ -7,7 +7,7 @@ import Carousel from "@/components/Carousel";
 
 export async function generateMetadata({ params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     const post = await getSinglePost(id);
 

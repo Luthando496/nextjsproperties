@@ -19,7 +19,6 @@ export const newUser = async () => {
   });
 
 
-    // console.log(user);
 };
 
 
@@ -29,7 +28,7 @@ export const newPost = async (data) => {
   try{
    const post=  await Post.create(data);
     console.log("Post created");
-    revalidatePath('/posts/add-post','layout')
+    revalidatePath('/posts/add-post','page')
     redirect(`/posts/${tagNames(post.title)}`)
 
 

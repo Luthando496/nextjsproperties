@@ -9,10 +9,6 @@ import "react-quill-new/dist/quill.snow.css";
 
 
 export default async function Home() {
-  await connectDB();
-
-  // await newPost();
-
   
   return (
     <>
