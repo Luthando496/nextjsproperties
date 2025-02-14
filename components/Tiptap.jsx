@@ -5,17 +5,19 @@ import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import "react-quill-new/dist/quill.snow.css";
 import ImagePicker from "./ImagePicker";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { newPost } from "@/app/actions/newPost";
+import { tagNames } from "@/utils/tagNames";
 
 
 
 function MyEditor({onSubmitData}) {
   const [image, setImage] = useState('');
-  const path = usePathname();
+  const router = useRouter();
 
-  const tags = ["Travel", "Food", "Lifestyle", "Business", "Tech", "Fashion", "Health", "Fitness", "Sports", "Entertainment","Ferrari","Cars"];
-  const categories = ["Travel", "Food", "Lifestyle", "Business", "Tech", "Fashion", "Health", "Fitness", "Sports", "Entertainment","Ferrari","Cars"];
+  const tags = ["Travel", "Food","News", "Lifestyle", "Business", "Tech", "Fashion", "Health", "Fitness", "Sports", "Entertainment","Ferrari","Cars","Food","Movies","Watches","Homes","Houses","Decor","Garden","Coding","Programming","Music"];
+
+  const categories = ["Travel","News", "Food", "Lifestyle", "Business", "Tech", "Fashion", "Health", "Fitness", "Sports", "Entertainment","Ferrari","Cars","Food","Movies","Watches","Homes","Houses","Decor","Garden","Coding","Programming","Music"];
   const [selectedTags, setSelectedTags] = useState([]);
 
   const [textData,setTextData] = useState("");
@@ -23,9 +25,10 @@ function MyEditor({onSubmitData}) {
   const [title,setTitle] = useState("")
   const [category,setCategory] = useState("")
 
-  const setHandleData = () => {
+  const setHandleData = async() => {
     const data = {author:"678abc99819fde96a4dd70e6",title,category,description:textData,postImage:image,tags:selectedTags}
-    newPost(data);
+    const post = await newPost(data);
+    router.push(`/posts/${tagNames(post.title)}`)
 
   }
 

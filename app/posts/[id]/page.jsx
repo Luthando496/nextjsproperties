@@ -3,7 +3,7 @@ import connectDB from "@/utils/connectDB";
 import React from "react";
 import Link from "next/link";
 import Post from "@/models/Post";
-import Carousel from "@/components/Carousel";
+import CardPost from "@/components/CardPost";
 
 export async function generateMetadata({ params }) {
   try {
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
 }
 
 const SinglePost = async ({ params }) => {
-  const { id } = params;
+  const { id } = await params;
   await connectDB();
   const post = await getSinglePost(id);
   const posts = await Post.find({
@@ -95,6 +95,17 @@ const SinglePost = async ({ params }) => {
 
       <section className="flex items-center justify-center mx-auto mt-[14rem] mb-10">
         <div className='px-[15rem]' dangerouslySetInnerHTML={{ __html: post.description }}></div>
+      </section>
+
+      <section className='w-full my-20 '>
+        <h2 className="text-3xl font-semibold text-center text-teal-800 mt-20 mb-2">Related Posts</h2>
+        <div className="h-[1px] bg-amber-800 flex justify-center mx-auto w-[200px]"></div>
+        <div className="container grid px-24 mt-20 justify-center grid-cols-2">
+
+        {posts.length > 0 && posts.map(post=>(
+          <CardPost key={post._id} post={post} />
+        ))}
+        </div>
       </section>
     </>
   );

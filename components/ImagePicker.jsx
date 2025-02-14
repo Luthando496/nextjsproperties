@@ -40,7 +40,6 @@ const ImagePicker = ({ setHandleImage, location }) => {
         );
         setUploadedImage(response.data.secure_url);
         setHandleImage(response.data.secure_url);
-        console.log("Uploaded image:", response.data);
       } catch (error) {
         console.error("Error uploading image:", error);
       } finally {

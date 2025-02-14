@@ -14,13 +14,13 @@ const SingleCategoryPage = async({params}) => {
 
   const categories = [
     "Apple",
-    "Mercedes",
+    "Architecture",
     "Ferrari",
     "News",
     "Technology",
     "Design",
     "Health",
-    "Nature",
+    "Environment",
   ];
 
   return (

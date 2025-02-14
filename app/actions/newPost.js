@@ -25,19 +25,16 @@ export const newUser = async () => {
 
 export const newPost = async (data) => {
   await connectDB();
-  try{
-   const post=  await Post.create(data);
+  try {
+    const post = await Post.create(data);
     console.log("Post created");
-    revalidatePath('/posts/add-post','page')
-    redirect(`/posts/${tagNames(post.title)}`)
 
-
-  }
-  catch(err){
-    console.log(err,"error");
+    return JSON.parse(JSON.stringify(post)); // Ensure plain object serialization
+  } catch (err) {
+    console.error("Error creating post:", err);
+    return null; // Avoid returning complex objects on error
   }
 };
-
 
 
 
