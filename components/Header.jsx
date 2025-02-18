@@ -12,7 +12,7 @@ const Header = async() => {
   return (
     <header className="w-full header-bg  relative min-h-screen pb-[8rem] pt-[4rem] space-y-8 main-header text-white flex items-center flex-col py-32 justify-center">
       <h1 className="text-5xl font-bold">Welcome to Next.js Blog</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full px-10">
+      <div className="grid container grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full px-10">
         {/* SINGLE */}
         {posts.length > 0 && posts.slice(0,4).map(post =>(
            <div key={post._id} className="article hover:translate-y-3 duration-500 h-[420px] z-0 relative bg-white text-black rounded-lg shadow-lg">

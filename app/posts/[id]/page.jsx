@@ -85,22 +85,22 @@ const SinglePost = async ({ params }) => {
         </div>
       </section>
 
-      <section className="w-full flex justify-center relative px-36 m-10 mx-auto">
+      <section className="w-full flex justify-center relative px-5 md:px-11 lg:px-36 m-10 mx-auto">
         <img
           src={post.postImage}
           alt="image"
-          className="h-[30rem] hover:-rotate-2 duration-500  w-[50rem] z-40 absolute object-cover -top-80"
+          className="h-[30rem] hover:-rotate-2 duration-500 px-10 w-full  lg:w-[50rem] z-40 absolute object-cover -top-80"
         />
       </section>
 
       <section className="flex items-center justify-center mx-auto mt-[14rem] mb-10">
-        <div className='px-[15rem]' dangerouslySetInnerHTML={{ __html: post.description }}></div>
+        <div className='px-8 md:px-14 lg:px-[15rem]' dangerouslySetInnerHTML={{ __html: post.description }}></div>
       </section>
 
       <section className='w-full my-20 '>
         <h2 className="text-3xl font-semibold text-center text-teal-800 mt-20 mb-2">Related Posts</h2>
         <div className="h-[1px] bg-amber-800 flex justify-center mx-auto w-[200px]"></div>
-        <div className="container grid px-24 mt-20 justify-center grid-cols-2">
+        <div className="container grid px-24 mt-20 justify-center lg:grid-cols-2">
 
         {posts.length > 0 && posts.map(post=>(
           <CardPost key={post._id} post={post} />
