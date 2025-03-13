@@ -8,8 +8,7 @@ import Link from "next/link";
 
 
 const HeroPosts = async() => {
-    const posts = await getPosts();
-    // console.log(posts)
+    const {posts} = await getPosts();
   return (
     <>
       <h1 className="text-center text-3xl font-bold mt-16">Latest Posts</h1>
@@ -18,13 +17,12 @@ const HeroPosts = async() => {
         <section className="w-full space-y-5 col-span-1 lg:col-span-2">
           {/* single post */}
           {posts.length > 0 ? posts.map((post,index) => (
-            <>
+            <section key={post.postID}>
             <div
-            key={post._id}
             className="w-full hidden overflow-hidden md:flex bg-white  shadow-md hover:rounded-b-lg hover:shadow-2xl hover:-translate-y-2 duration-500"
           >
             <img
-              src={post.postImage}
+              src={post.post_image}
               alt="post-image"
               className="h-[266px] object-cover w-[240px] flex-[25%]"
               // fill
@@ -63,7 +61,7 @@ const HeroPosts = async() => {
                
              </div>
            </div>
-            </>
+            </section>
           )) : <h1>No Posts</h1>}
           
   
@@ -86,7 +84,7 @@ const HeroPosts = async() => {
           <div className="flex flex-col mt-6 gap-3">
             {/* single post */}
             {posts.length > 0 ? posts.map((post) => (
-              <Link key={post._id} href={`/posts/${tagNames(post.title)}`} className="text-lg text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">{post.title}</Link>
+              <Link key={post.postID} href={`/posts/${tagNames(post.title)}`} className="text-lg text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">{post.title}</Link>
             )) : <h1>No Posts</h1>}
             
           </div>

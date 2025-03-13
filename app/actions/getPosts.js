@@ -1,16 +1,54 @@
 "use server"
-
-import Post from "@/models/Post";
-import connectDB from "@/utils/connectDB";
+const { supabase } = require("@/utils/connectDB");
 
 
 const getPosts = async () => {
-    await connectDB();
-    
-    const posts = await Post.find({}).populate("author").sort({ createdAt: -1 }).limit(5);
-    if(!posts) return [];
-    return posts;
+    const { data, error } = await supabase.from('post').select('*').order('created_at', { ascending: false });
+
+    if (error) {
+        console.error("Error fetching posts:", error);
+        return { posts: [], error };
+    }
+
+    return { posts: data, error};
 }
+
+
+export const getRelatedPost = async (post) => {
+    const searchTag = post.category;
+        console.log(searchTag,"category")
+        const { data, error } = await supabase
+        .from('post')
+        .select('*')
+        .contains('tags', [searchTag]);
+
+        const filteredPosts = data.filter(p=> p.postID !== post.postID)
+
+
+  // Case-insensitive search
+
+  if (error) console.error("Error fetching Related Posts post:", error);
+
+  return filteredPosts;
+};
+
+
+export const getPostsByCategory = async (category) => {
+        console.log(category,"category")
+        const { data, error } = await supabase
+        .from('post')
+        .select('*')
+        .contains('tags', [category]);
+
+        console.log(data,"Tags posts")
+
+
+  // Case-insensitive search
+
+  if (error) console.error("Error fetching Related Posts post:", error);
+
+  return data;
+};
 
 export default getPosts;
 

@@ -10,7 +10,7 @@ const CardPost = ({post}) => {
           className="w-full overflow-hidden flex bg-white  shadow-md hover:rounded-b-lg hover:shadow-2xl hover:-translate-y-2 duration-500"
         >
           <Image
-            src={post.postImage}
+            src={post.post_image}
             alt="post-image"
             className="h-[15rem] object-cover w-[240px] flex-[25%]"
             width={240}

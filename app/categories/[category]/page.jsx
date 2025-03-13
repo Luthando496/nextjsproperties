@@ -1,20 +1,17 @@
 import Post from '@/models/Post';
-import connectDB from '@/utils/connectDB';
 import { tagNames } from '@/utils/tagNames';
 import Link from 'next/link'
 import React from 'react'
+import { getPostsByCategory } from '@/app/actions/getPosts';
 
 const SingleCategoryPage = async({params}) => {
-  await connectDB();
   const { category } = await params;
-  const caseInsensitiveCategory = new RegExp(category, 'i');
-  const postsWithCategory = await Post.find({
-    tags: { $in: [caseInsensitiveCategory] }
-  });
+  const postsWithCategory = await getPostsByCategory(category);
+  
 
   const categories = [
-    "Apple",
-    "Architecture",
+    "Fitness",
+    "Health",
     "Ferrari",
     "News",
     "Technology",
@@ -35,12 +32,12 @@ const SingleCategoryPage = async({params}) => {
 
       <main className="grid grid-cols-1 md:grid-cols-3 py-24 px-10 md:px-24">
         <div className="col-span-2 w-full grid grid-cols-1 mb-8 md:grid-cols-2 gap-5">
-          {postsWithCategory.length > 0 && postsWithCategory.map((post)=>(
+          {postsWithCategory.length > 0 ? postsWithCategory.map((post)=>(
             
-          <div key={post._id} className="w-full shadow-xl hover:-translate-y-2 duration-500">
+          <div key={post.postID} className="w-full shadow-xl hover:-translate-y-2 duration-500">
             <img
-              src={post.postImage}
-              alt=""
+              src={post.post_image}
+              alt="post-Image"
               className="w-full h-[12rem] object-cover"
             />
             <h1  className="text-xl text-center py-2">
@@ -53,7 +50,7 @@ const SingleCategoryPage = async({params}) => {
               
             </div>
           </div>
-          ))}
+          )) : <h1>Not Posts With That category Found!</h1>}
           
         </div>
 

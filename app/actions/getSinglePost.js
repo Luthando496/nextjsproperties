@@ -1,16 +1,22 @@
-"use server"
-
-import Post from "@/models/Post";
-import connectDB from "@/utils/connectDB";
+"use server";
+const { supabase } = require("@/utils/connectDB");
 
 
 const getSinglePost = async (id) => {
-    await connectDB();
-    const title = id.split("-").join(" ");
-    
-    const post = await Post.findOne({title:{'$regex': title,$options:'i'}}).populate("author");
-    if(!post) return null;
-    return post;
-}
+      const title = id.split("-").join(" ");
+      console.log(title , "This is title")
+
+  const { data, error } = await supabase
+    .from("post")
+    .select("*")
+    .ilike("title", `%${title}`); // Case-insensitive search
+
+  if (error) console.error("Error fetching post:", error);
+
+  return data[0];
+};
+
+
+
 
 export default getSinglePost;

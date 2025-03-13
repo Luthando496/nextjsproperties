@@ -1,9 +1,12 @@
 import getSinglePost from "@/app/actions/getSinglePost";
-import connectDB from "@/utils/connectDB";
 import React from "react";
 import Link from "next/link";
-import Post from "@/models/Post";
 import CardPost from "@/components/CardPost";
+import getPosts,{getRelatedPost} from "@/app/actions/getPosts";
+// import {getRelatedPost} from '@app/actions/getSinglePost'
+
+
+
 
 export async function generateMetadata({ params }) {
   try {
@@ -31,11 +34,8 @@ export async function generateMetadata({ params }) {
 
 const SinglePost = async ({ params }) => {
   const { id } = await params;
-  await connectDB();
   const post = await getSinglePost(id);
-  const posts = await Post.find({
-    tags: { $regex: post.category, $options: "i" },
-  }).populate("author");
+  const posts = await getRelatedPost(post);
   if (!post) {
     return <div>Post not found</div>;
   }
@@ -64,7 +64,7 @@ const SinglePost = async ({ params }) => {
           <div className="w-1/2">
             <div className="flex justify-center items-center">
               <img
-                src={post.postImage}
+                src={post.post_image}
                 alt="image"
                 className="w-28 h-28 my-3 rounded-full object-cover"
               />
@@ -77,8 +77,8 @@ const SinglePost = async ({ params }) => {
                 {post?.author?.name}
               </span>
               <span className="text-sm text-white font-semibold">
-                {new Date(post.createdAt).getDate()} ,{" "}
-                {new Date(post.createdAt).getFullYear()}{" "}
+                {new Date(post.created_at).getDate()} ,{" "}
+                {new Date(post.created_at).getFullYear()}{" "}
               </span>
             </div>
           </div>
@@ -87,7 +87,7 @@ const SinglePost = async ({ params }) => {
 
       <section className="w-full flex justify-center relative px-5 md:px-11 lg:px-36 m-10 mx-auto">
         <img
-          src={post.postImage}
+          src={post.post_image}
           alt="image"
           className="h-[30rem] hover:-rotate-2 duration-500 px-10 w-full  lg:w-[50rem] z-40 absolute object-cover -top-80"
         />
@@ -100,10 +100,10 @@ const SinglePost = async ({ params }) => {
       <section className='w-full my-20 '>
         <h2 className="text-3xl font-semibold text-center text-teal-800 mt-20 mb-2">Related Posts</h2>
         <div className="h-[1px] bg-amber-800 flex justify-center mx-auto w-[200px]"></div>
-        <div className="container grid px-24 mt-20 justify-center lg:grid-cols-2">
+        <div className="container grid px-24 mt-20 justify-center gap-10 lg:grid-cols-2">
 
         {posts.length > 0 && posts.map(post=>(
-          <CardPost key={post._id} post={post} />
+          <CardPost key={post.postID} post={post} />
         ))}
         </div>
       </section>
