@@ -7,7 +7,7 @@ import Link from "next/link";
 
 
 const Header = async() => {
-  const posts = await getPosts();
+  const {posts} = await getPosts();
 
   return (
     <header className="w-full header-bg  relative min-h-screen pb-[8rem] pt-[4rem] space-y-8 main-header text-white flex items-center flex-col py-32 justify-center">
@@ -15,10 +15,10 @@ const Header = async() => {
       <div className="grid container grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full px-10">
         {/* SINGLE */}
         {posts.length > 0 && posts.slice(0,4).map(post =>(
-           <div key={post._id} className="article hover:translate-y-3 duration-500 h-[420px] z-0 relative bg-white text-black rounded-lg shadow-lg">
+           <div key={post.postID} className="article hover:translate-y-3 duration-500 h-[420px] z-0 relative bg-white text-black rounded-lg shadow-lg">
            {/* IMAGE */}
            <Image
-             src={post.postImage}
+             src={post.post_image}
              alt={post.title}
              width={300}
              height={200}

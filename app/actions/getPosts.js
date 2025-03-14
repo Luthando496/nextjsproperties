@@ -16,7 +16,6 @@ const getPosts = async () => {
 
 export const getRelatedPost = async (post) => {
     const searchTag = post.category;
-        console.log(searchTag,"category")
         const { data, error } = await supabase
         .from('post')
         .select('*')
@@ -34,13 +33,11 @@ export const getRelatedPost = async (post) => {
 
 
 export const getPostsByCategory = async (category) => {
-        console.log(category,"category")
         const { data, error } = await supabase
         .from('post')
         .select('*')
         .contains('tags', [category]);
 
-        console.log(data,"Tags posts")
 
 
   // Case-insensitive search
