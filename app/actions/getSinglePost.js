@@ -1,5 +1,5 @@
 "use server";
-const { supabase } = require("@/utils/connectDB");
+import { supabase } from "@/utils/connectDB";
 
 
 const getSinglePost = async (id) => {

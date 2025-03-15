@@ -55,7 +55,7 @@ const SinglePost = async ({ params }) => {
           className="group overflow-hidden  text-lg font-serif relative  hover:border-none pb-1 flex gap-3"
         >
           {post.category} <span className="">/</span>
-          <span className="group-hover:-translate-x-full translate-x-0 duration-500  absolute bottom-0 w-[88%] h-[1px] bg-white"></span>
+          <span className="group-hover:-translate-x-full translate-x-0 duration-500  absolute bottom-0 w-[80%] h-[1px] bg-white"></span>
         </Link>
         <span className="text-lg"> {post.title}</span>
       </div>
@@ -77,7 +77,7 @@ const SinglePost = async ({ params }) => {
                 {post?.author?.name}
               </span>
               <span className="text-sm text-white font-semibold">
-                {new Date(post.created_at).getDate()} ,{" "}
+                Post Was Created On {new Date(post.created_at).getDate()} ,{" "}{" "}
                 {new Date(post.created_at).getFullYear()}{" "}
               </span>
             </div>

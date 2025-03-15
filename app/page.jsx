@@ -1,8 +1,7 @@
 import Header from "@/components/Header";
 import HeroPosts from "@/components/HeroPosts";
-import connectDB from "@/utils/connectDB";
-import { getPosts, newPost, newUser } from "./actions/newPost";
 import "react-quill-new/dist/quill.snow.css";
+import { Suspense } from "react";
 
 
 
@@ -12,9 +11,12 @@ export default async function Home() {
   
   return (
     <>
-      {/* <Navbar /> */}
+
       <Header />
+
+    <Suspense fallback={<div>Loading posts...</div>}>
       <HeroPosts />
+    </Suspense>
     </>
   );
 }

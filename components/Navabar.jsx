@@ -1,11 +1,24 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaGithub } from "react-icons/fa";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+// import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { supabase } from "@/utils/connectDB";
+import useAuthStore from "@/store/store";
+import { getSessionUser } from "@/utils/getSession";
 
 const Navbar = () => {
-  const { data: session } = useSession();
+  const { signInWithGitHub, fetchUser, user, signOut,signInWithGoogle } = useAuthStore(
+    (state) => state
+  );
+
+  useEffect(() => {
+    const getSession = async () => {
+      await fetchUser();
+    };
+
+    getSession();
+  }, []);
 
   // const profileImage = session?.user?.image
 
@@ -13,16 +26,27 @@ const Navbar = () => {
   // const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [providers, setProviders] = useState(null);
 
-  useEffect(() => {
-    const setAuthProviders = async () => {
-      const provider = await getProviders();
-      setProviders(provider);
-    };
+  // useEffect(() => {
+  //   const setAuthProviders = async () => {
+  //     const provider = await getProviders();
+  //     setProviders(provider);
+  //   };
 
-    setAuthProviders();
-  }, []);
+  //   setAuthProviders();
+  // }, []);
 
-  console.log(providers, "providers");
+  async function signGithub() {
+    
+
+    await signInWithGitHub(data);
+
+    if (error) {
+      console.error("GitHub Login Error:", error.message);
+    } else {
+      console.log("Login Successful:", data);
+    }
+  }
+
   return (
     <header className="w-full bg-[#900024] py-5 flex justify-between px-10 items-center">
       {/* Logo */}
@@ -40,8 +64,6 @@ const Navbar = () => {
           >
             Home
           </Link>
-
-          
         </li>
 
         <li>
@@ -53,7 +75,6 @@ const Navbar = () => {
           </Link>
         </li>
 
-        
         <li className="relative group">
           <Link
             href={`/categories`}
@@ -61,33 +82,31 @@ const Navbar = () => {
           >
             Categories
           </Link>
-          
         </li>
       </ul>
-      {!session && (
+      {!user && (
         <div className="hidden md:block md:ml-6">
-          <div className="flex items-center">
-            {providers &&
-              Object.values(providers).map((provider, index) => (
-                <button
-                  key={index}
-                  onClick={() => signIn(provider.id)}
-                  className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                >
-                  {/* {provider.id === "google" && <FaGoogle className='text-white mr-2' />} */}
-                  {provider.id === "github" && (
-                    <FaGithub className="text-white mr-2" />
-                  )}
-                  <span>Login or Register</span>
-                </button>
-              ))}
+          <div className="flex gap-4 items-center">
+            <button
+              onClick={signGithub}
+              className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+            >
+              <FaGithub className="text-white mr-2" />
+              <span>Login or Register</span>
+            </button>
+            <button
+              onClick={async()=> await signInWithGoogle()}
+              className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+            >
+              <FaGoogle className="text-white mr-2" />
+              <span>Login or Register</span>
+            </button>
           </div>
         </div>
       )}
-      {session && (
+      {user && (
         <button
           onClick={() => {
-            // setIsProfileMenuOpen(false)
             signOut();
           }}
           className="block px-4 py-2 text-sm text-white"

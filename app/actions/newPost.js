@@ -1,5 +1,7 @@
 // "use server";
 
+import { supabase } from "@/utils/connectDB";
+
 // import Post from "@/models/Post";
 // import User from "@/models/User";
 // import connectDB from "@/utils/connectDB";
@@ -23,14 +25,17 @@
 
 
 
-export const newPost = async (data) => {
+export const newPost = async (myData) => {
   try {
-    // const post = await Post.create(data);
-    console.log("Post created");
+    const {data,error} = await supabase.from('post').insert([myData]).select();
+    console.log("Post created, ",data);
+
+
+    if(data) return data[0];
 
     // return JSON.parse(JSON.stringify(post)); // Ensure plain object serialization
-  } catch (err) {
-    console.error("Error creating post:", err);
+  } catch (error) {
+    console.error("Error creating post:", error?.message);
     return null; // Avoid returning complex objects on error
   }
 };
