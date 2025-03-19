@@ -38,7 +38,7 @@ const Navbar = () => {
   async function signGithub() {
     
 
-    await signInWithGitHub(data);
+    await signInWithGitHub();
 
     if (error) {
       console.error("GitHub Login Error:", error.message);

@@ -18,5 +18,23 @@ const getSinglePost = async (id) => {
 
 
 
+export async function searchBlogs(searchTerm) {
+  const { data, error } = await supabase
+      .from("post")
+      .select("*")
+      .or(`title.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`);
+
+      console.log(data,"DATA SERVER")
+
+  if (error) {
+      console.error("Error searching blogs:", error);
+      return [];
+  }
+  return data;
+}
+
+
+
+
 
 export default getSinglePost;

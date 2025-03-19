@@ -35,6 +35,8 @@ export async function generateMetadata({ params }) {
 const SinglePost = async ({ params }) => {
   const { id } = await params;
   const post = await getSinglePost(id);
+
+  console.log("Current Post : ", post )
   const posts = await getRelatedPost(post);
   if (!post) {
     return <div>Post not found</div>;
@@ -51,10 +53,10 @@ const SinglePost = async ({ params }) => {
           <span className="group-hover:-translate-x-full translate-x-0 duration-500  absolute bottom-0 w-[88%] h-[1px] bg-white"></span>
         </Link>
         <Link
-          href={`/categories/${post.category}`}
+          href={`/categories/${post?.category}`}
           className="group overflow-hidden  text-lg font-serif relative  hover:border-none pb-1 flex gap-3"
         >
-          {post.category} <span className="">/</span>
+          {post?.category} <span className="">/</span>
           <span className="group-hover:-translate-x-full translate-x-0 duration-500  absolute bottom-0 w-[80%] h-[1px] bg-white"></span>
         </Link>
         <span className="text-lg"> {post.title}</span>
