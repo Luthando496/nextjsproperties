@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { newPost } from "@/app/actions/newPost";
 import useAuthStore from "@/store/store";
 import { tagNames } from "@/utils/tagNames";
+import { revalidatePath } from "next/cache";
 
 function MyEditor() {
   const [image, setImage] = useState("");
@@ -35,8 +36,9 @@ function MyEditor() {
       post_image: image,
       tags: selectedTags,
     };
-
+    
     const post = await newPost(data);
+    console.log(post,"my post data")
     if (post) {
       console.log("Post created successfully! ",post);
       router.push(`/posts/${tagNames(post.title)}`); // Fix if needed
@@ -79,12 +81,13 @@ function MyEditor() {
 
   return (
     <>
-      {!user ? (
+      {/* {!user ? (
         <h1 className="text-center font-play text-4xl">No user Found</h1>
-      ) : (
+      ) : ( */}
         <>
           <div className="px-40 mx-auto my-14">
-            <ImagePicker location={"post"} myData={textData} setHandleImage={setImage} />
+            {/* <ImagePicker location={"post"} myData={textData} setHandleImage={setImage} /> */}
+            <input type="file" name="image" onChange={(e)=> setImage(e.target.files[0])} id="image" />
           </div>
 
           <div className="px-24 my-4">
@@ -149,7 +152,7 @@ function MyEditor() {
             </button>
           </div>
         </>
-      )}
+      {/* )} */}
     </>
   );
 }

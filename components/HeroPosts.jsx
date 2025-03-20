@@ -2,7 +2,7 @@ import getPosts from "@/app/actions/getPosts";
 import { tagNames } from "@/utils/tagNames";
 import Image from "next/image";
 import Link from "next/link";
-import sanitizeHtml from "sanitize-html";
+import CardPost from "./CardPost";
 
 
 
@@ -12,62 +12,14 @@ const HeroPosts = async() => {
   return (
     <>
       <h1 className="text-center text-3xl font-bold mt-16">Latest Posts</h1>
-      <main className="grid grid-cols-1 relative lg:grid-cols-3 gap-20 px-20 bg-white py-10">
+      <main className="grid grid-cols-1 relative lg:grid-cols-3 gap-20 px-8  lg:px-20 bg-white py-10">
         {/* left section */}
         <section className="w-full space-y-5 col-span-1 lg:col-span-2">
           {/* single post */}
           {posts.length > 0 ? posts.map((post,index) =>{
-            const sanitizedDescription = sanitizeHtml(post.description);
+           
 
-            return (
-              <section key={post.postID}>
-              <div
-              className="w-full hidden overflow-hidden md:flex bg-white  shadow-md hover:rounded-b-lg hover:shadow-2xl hover:-translate-y-2 duration-500"
-            >
-              <Image
-                src={post.post_image}
-                alt="post-image"
-                className="h-[266px] object-cover w-[240px] flex-[25%]"
-                width={250}
-                height={300}
-                // fill
-              />
-              <div className="flex flex-col flex-[75%] space-y-6 justify-center py-3 px-2 items-center">
-              <h1 className="text-xl text-center py-2">
-                <Link
-                  href={`/posts/${tagNames(post.title)}`}
-                  className="text-[#900024] font-play"
-                >
-                  {post.title}
-                </Link>
-                {/* Exploring the Beauty of Nature */}
-              </h1>
-              <div
-                dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
-                className="line-clamp-6 pb-[2px] h font-roboto text-center overflow-hidden px-3 "
-              ></div>
-  
-              </div>
-            </div>
-            {/* separator */}
-            <div key={post.postID} className="w-full md:hidden shadow-xl hover:-translate-y-2 duration-500">
-               <img
-                 src={post.postImage}
-                 alt=""
-                 className="w-full h-[12rem] object-cover"
-               />
-               <h1  className="text-xl text-center py-2">
-                 <Link href={`/posts/${tagNames(post.title)}`} className="text-teal-600">
-                   {post.title}
-                 </Link>
-                 
-               </h1>
-               <div  dangerouslySetInnerHTML={{__html:post.description}} className="line-clamp-[4] text-center overflow-hidden px-3 pb-1">
-                 
-               </div>
-             </div>
-              </section>
-            )
+            return <CardPost key={post.postID} post={post}   />
           } 
           ) : <h1>No Posts</h1>}
           

@@ -47,4 +47,5 @@ if (error) {
     //   return session;
     // },
   },
+  secret: process.env.NEXTAUTH_URL,
 };

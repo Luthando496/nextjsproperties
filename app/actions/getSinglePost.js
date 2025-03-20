@@ -4,7 +4,6 @@ import { supabase } from "@/utils/connectDB";
 
 const getSinglePost = async (id) => {
       const title = id.split("-").join(" ");
-      console.log(title , "This is title")
 
   const { data, error } = await supabase
     .from("post")

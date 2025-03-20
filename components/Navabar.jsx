@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaGithub, FaGoogle } from "react-icons/fa";
-// import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import { supabase } from "@/utils/connectDB";
+import { FaGithub } from "react-icons/fa";
+import GoogleButton from 'react-google-button'
+
 import useAuthStore from "@/store/store";
-import { getSessionUser } from "@/utils/getSession";
+
 
 const Navbar = () => {
   const { signInWithGitHub, fetchUser, user, signOut,signInWithGoogle } = useAuthStore(
@@ -20,47 +20,31 @@ const Navbar = () => {
     getSession();
   }, []);
 
-  // const profileImage = session?.user?.image
 
-  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [providers, setProviders] = useState(null);
 
-  // useEffect(() => {
-  //   const setAuthProviders = async () => {
-  //     const provider = await getProviders();
-  //     setProviders(provider);
-  //   };
-
-  //   setAuthProviders();
-  // }, []);
 
   async function signGithub() {
     
 
     await signInWithGitHub();
 
-    if (error) {
-      console.error("GitHub Login Error:", error.message);
-    } else {
-      console.log("Login Successful:", data);
-    }
+    
   }
 
   return (
-    <header className="w-full bg-[#900024] py-5 flex justify-between px-10 items-center">
+    <header className="w-full bg-[#900024] py-5 flex justify-between px-4 md:px-10 items-center">
       {/* Logo */}
-      <Link href="/" className="text-3xl text-white font-bold">
-        Next.js Blog
+      <Link href="/" className="text-xl md:text-3xl text-white md:font-bold">
+        Blog2Go
       </Link>
 
       {/* Navigation */}
-      <ul className="hidden lg:flex items-center gap-6 pr-10">
+      <ul className="flex items-center gap-6 pr-10">
         {/* Home with Dropdown */}
         <li className="relative group">
           <Link
             href="/"
-            className="text-white hover:text-gray-300 text-2xl font-light leading-3"
+            className="text-white hover:text-gray-300 text-base md:text-2xl font-bold md:font-light leading-3"
           >
             Home
           </Link>
@@ -69,7 +53,7 @@ const Navbar = () => {
         <li>
           <Link
             href="/posts/add-post"
-            className="text-white hover:text-gray-300 text-2xl font-light leading-3"
+            className="text-white hover:text-gray-300 text-base md:text-2xl font-bold md:font-light leading-3"
           >
             Add
           </Link>
@@ -78,7 +62,7 @@ const Navbar = () => {
         <li className="relative group">
           <Link
             href={`/categories`}
-            className="text-white capitalize hover:text-gray-300 text-2xl font-light leading-3"
+            className="text-white capitalize hover:text-gray-300 text-base md:text-2xl font-bold md:font-light leading-3"
           >
             Categories
           </Link>
@@ -92,15 +76,9 @@ const Navbar = () => {
               className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
             >
               <FaGithub className="text-white mr-2" />
-              <span>Login or Register</span>
+              <span>login With GitHub</span>
             </button>
-            <button
-              onClick={async()=> await signInWithGoogle()}
-              className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-            >
-              <FaGoogle className="text-white mr-2" />
-              <span>Login or Register</span>
-            </button>
+              <GoogleButton onClick={async()=> await signInWithGoogle()} className="text-red-900 mr-2" />
           </div>
         </div>
       )}

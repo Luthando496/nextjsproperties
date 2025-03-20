@@ -2,36 +2,36 @@
 
 import { supabase } from "@/utils/connectDB";
 
-// import Post from "@/models/Post";
-// import User from "@/models/User";
-// import connectDB from "@/utils/connectDB";
-// import dataPosts from '@/data2.json' 
-// import { redirect } from "next/navigation";
-// import { tagNames } from "@/utils/tagNames";
-// import { revalidatePath } from "next/cache";
-
-// export const newUser = async () => {
-//   await connectDB();
-
-
-//   const user = await User.create({
-//     name: "John Doe",
-//     email: "doe@gmail.com",
-//     profileImage: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-//   });
-
-
-// };
 
 
 
 export const newPost = async (myData) => {
   try {
-    const {data,error} = await supabase.from('post').insert([myData]).select();
-    console.log("Post created, ",data);
+    const fileName = `${Date.now()}_${myData.post_image.name}`;
+    
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from("images")
+      .upload(fileName, myData.post_image);
 
+    if(uploadError) {
+      console.error("File upload error:", uploadError.message);
+      return;
+    }
+    const { data: publicUrlData } = supabase
+    .storage
+    .from("images")
+    .getPublicUrl(fileName);
 
-    if(data) return data[0];
+    myData.post_image = publicUrlData.publicUrl;
+
+    const { data, error } = await supabase
+      .from("post")
+      .insert([myData])
+      .select();
+    console.log("Post created, ", data);
+
+    if (data) return data[0];
+
 
     // return JSON.parse(JSON.stringify(post)); // Ensure plain object serialization
   } catch (error) {
@@ -39,6 +39,3 @@ export const newPost = async (myData) => {
     return null; // Avoid returning complex objects on error
   }
 };
-
-
-

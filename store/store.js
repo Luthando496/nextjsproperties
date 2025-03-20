@@ -2,38 +2,34 @@ import { supabase } from "@/utils/connectDB";
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
-
-
 const useAuthStore = create(
   persist(
     devtools((set) => ({
       user: null,
 
       signInWithGitHub: async () => {
-        const { data:signGitData, error } = await supabase.auth.signInWithOAuth({
+        const { data, error } = await supabase.auth.signInWithOAuth({
           provider: "github",
         });
-
 
         if (error) {
           console.error("GitHub Login Error:", error.message);
         } else {
-          console.log("Login Successful:", signGitData);
-          set({ user: signGitData.user });
+          console.log("Login Successful:", data);
+          set({ user: data.user });
         }
       },
 
       signInWithGoogle: async () => {
-        const { data:signGitData, error } = await supabase.auth.signInWithOAuth({
+        const { data, error } = await supabase.auth.signInWithOAuth({
           provider: "google",
         });
-
 
         if (error) {
           console.error("Google Login Error:", error.message);
         } else {
-          console.log("Login Successful:", signGitData);
-          set({ user: signGitData.user });
+          console.log("Login Successful:", data);
+          set({ user: data.user });
         }
       },
 

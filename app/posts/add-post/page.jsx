@@ -1,36 +1,27 @@
-// "use client"
+"use client";
 
-import MyEditor from '@/components/Tiptap'
+import MyEditor from "@/components/Tiptap";
+import useAuthStore from "@/store/store";
 
-import { useSession } from 'next-auth/react'
-// import React, { useEffect, useState } from 'react'
-
-export const metadata = {
-  title:"Add New Post"
-}
-
-const page = async() => {
-  // const { data: session } = useSession();
-  
-    // const [providers, setProviders] = useState(null);
-  
-    // useEffect(() => {
-    //   const setAuthProviders = async () => {
-    //     const provider = await getProviders();
-    //     setProviders(provider);
-    //   };
-  
-    //   setAuthProviders();
-    // }, []);
+const page = () => {
+  const { user } = useAuthStore((state) => state);
+  if (!user) {
+    return (
+      <section className="h-screen text-center flex justify-center items-center">
+        <h1 className="text-5xl font-bold text-red-500">
+          Please login to add post
+        </h1>
+      </section>
+    );
+  }
 
   return (
     <>
-    <section className='my-28'>
+      <section className="my-28">
         <MyEditor />
-    </section>
-    
+      </section>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;
