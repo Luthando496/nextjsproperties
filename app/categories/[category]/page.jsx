@@ -30,7 +30,7 @@ const SingleCategoryPage = async ({ params }) => {
         </div>
       </section>
 
-      <SearchComponent />
+      {/* <SearchComponent /> */}
 
       <main className="grid grid-cols-1 md:grid-cols-3 py-24 px-10 md:px-24">
         <div className="col-span-2 w-full grid grid-cols-1 mb-8 md:grid-cols-2 gap-5">

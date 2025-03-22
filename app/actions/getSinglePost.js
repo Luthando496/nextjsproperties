@@ -10,9 +10,14 @@ const getSinglePost = async (id) => {
     .select("*")
     .ilike("title", `%${title}`); // Case-insensitive search
 
-  if (error) console.error("Error fetching post:", error);
+    // console.log(data,"DATA SERVER")
 
-  return data[0];
+  if (error) {
+    console.error("Error fetching post:", error)
+  }else{
+    return data[0];
+  };
+
 };
 
 
@@ -21,9 +26,7 @@ export async function searchBlogs(searchTerm) {
   const { data, error } = await supabase
       .from("post")
       .select("*")
-      .or(`title.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%`);
-
-      console.log(data,"DATA SERVER")
+      .or(`title.ilike.%${searchTerm}%`);
 
   if (error) {
       console.error("Error searching blogs:", error);

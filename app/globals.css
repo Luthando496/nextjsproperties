@@ -24,6 +24,13 @@
   clip-path: polygon(0 0, 100% 0, 100% 69%, 0 100%);
 }
 
+@media screen and (max-width: 768px) {
+  .tilted-div {
+    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+  }
+  
+}
+
 .embla {
   max-width: 48rem;
   margin: auto;

@@ -1,6 +1,5 @@
 import getSinglePost from "@/app/actions/getSinglePost";
 import React from "react";
-import Link from "next/link";
 import CardPost from "@/components/CardPost";
 import getPosts,{getRelatedPost} from "@/app/actions/getPosts";
 import SinglePageContent from "@/components/SinglePageContent";
@@ -48,8 +47,8 @@ const SinglePost = async ({ params }) => {
 
       <section className='w-full my-20 '>
         <h2 className="text-3xl font-semibold text-center text-teal-800 mt-20 mb-2">Related Posts</h2>
-        <div className="h-[1px] bg-amber-800 flex justify-center mx-auto w-[200px]"></div>
-        <div className="container grid px-24 mt-20 justify-center gap-10 lg:grid-cols-2">
+        <div className="h-[1px] bg-amber-800 flex justify-center mx-auto w-[140px] md:w-[200px]"></div>
+        <div className="container grid px-10 md:px-24 mt-20 justify-center gap-10 lg:grid-cols-2">
 
         {posts.length > 0 && posts.map(post=>(
           <CardPost key={post.postID} post={post} />

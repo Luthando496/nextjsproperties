@@ -31,19 +31,19 @@ const HeroPosts = async() => {
           <div className="flex gap-4 py-5">
             <input
               type="text"
-              className="w-full px-8 placeholder:text-xl placeholder:font-light focus:outline-none focus:border-b focus:border-b-red-700"
+              className="w-full px-3 md:px-8 placeholder:text-xl placeholder:font-light focus:outline-none focus:border-b focus:border-b-red-700"
               placeholder="Search You Favorite Topics"
             />
-            <button className="bg-[#db0231cc] tracking-[3px] uppercase px-2 text-white py-2">
+            <button className="bg-[#db0231cc] rounded-sm md:tracking-[3px] text-base uppercase px-2 text-white py-2">
               Search
             </button>
           </div>
 
           <h2 className="text-4xl font-bold text-red-600">Recent Posts</h2>
-          <div className="flex flex-col mt-6 gap-3">
+          <div className="flex flex-col mt-6 gap-1 md:gap-3">
             {/* single post */}
-            {posts.length > 0 ? posts.map((post) => (
-              <Link key={post.postID} href={`/posts/${tagNames(post.title)}`} className="text-lg text-black font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">{post.title}</Link>
+            {posts.length > 0 ? posts.slice(0,5).map((post) => (
+              <Link key={post.postID} href={`/posts/${tagNames(post.title)}`} className="text-base font-semibold md:text-lg text-black md:font-light pb-1 hover:border-b hover:border-b-amber-500 cursor-pointer">{post.title}</Link>
             )) : <h1>No Posts</h1>}
             
           </div>
