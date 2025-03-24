@@ -1,7 +1,7 @@
 "use client";
 
 import { searchBlogs } from "@/app/actions/getSinglePost";
-import CardPost from "@/components/CardPost";
+// import CardPost from "@/components/CardPost";
 import { tagNames } from "@/utils/tagNames";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,7 +49,7 @@ const SearchPage = () => {
       <section className="my-10 w-full px-8 lg:px-28">
         {/* Search Results */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {posts.length > 0 ? (
+          {posts.length > 0 && (
             posts.map((post) => (
               <div className="w-full overflow-hidden flex flex-col  bg-black lg:bg-white  shadow-md shadow-black hover:rounded-b-lg hover:shadow-2xl hover:-translate-y-2 duration-500">
                 <Link href={`/posts/${tagNames(post.title)}`}>
@@ -79,10 +79,11 @@ const SearchPage = () => {
                 </div>
               </div>
             ))
-          ) : (
-            <div className="text-center text-2xl">No Post Found</div>
           )}
+
         </div>
+
+          {posts.length === 0 && (<div className="text-center text-2xl lg:text-4xl font-semibold text-red-600">No Post Found</div>)}
       </section>
     </>
   );

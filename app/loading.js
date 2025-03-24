@@ -1,20 +1,38 @@
 "use client";
 
-import { FidgetSpinner } from "react-loader-spinner";
+import { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
-const loading = () => {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <FidgetSpinner
-        visible={true}
-        height="180"
-        width="180"
-        ariaLabel="fidget-spinner-loading"
-        wrapperStyle={{}}
-        wrapperClass="fidget-spinner-wrapper"
-      />
-    </div>
-  );
+const override =  {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
 };
+
+function loading() {
+  let [loadingState, setLoading] = useState(true);
+  let [color, setColor] = useState("#ffffff");
+
+  return (
+    <>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+
+    <div className="sweet-loading">
+      {/* <input value={color} onChange={(input) => setColor(input.target.value)} placeholder="Color of the loader" /> */}
+
+      <ClipLoader
+        color={"#f52"}
+        loading={loadingState}
+        cssOverride={override}
+        size={350}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+        />
+    </div>
+        </div>
+        </>
+  );
+}
+
 
 export default loading;

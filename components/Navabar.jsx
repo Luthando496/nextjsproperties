@@ -61,10 +61,10 @@ const Navbar = () => {
 
         <li className="relative group">
           <Link
-            href={`/categories`}
+            href={`/search-page`}
             className="text-white capitalize hover:text-gray-300 text-base md:text-2xl font-bold md:font-light leading-3"
           >
-            Categories
+            Search
           </Link>
         </li>
       </ul>
