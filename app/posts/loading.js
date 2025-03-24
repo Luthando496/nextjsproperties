@@ -1,21 +1,38 @@
 "use client";
 
-import { ColorRing } from "react-loader-spinner";
+import { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
-const loading = () => {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <ColorRing
-        visible={true}
-        height="280"
-        width="280"
-        ariaLabel="color-ring-loading"
-        wrapperStyle={{}}
-        wrapperClass="color-ring-wrapper"
-        colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-      />
-    </div>
-  );
+const override =  {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
 };
+
+function loading() {
+  let [loadingState, setLoading] = useState(true);
+
+
+  return (
+    <>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+
+    <div className="sweet-loading">
+      {/* <input value={color} onChange={(input) => setColor(input.target.value)} placeholder="Color of the loader" /> */}
+
+      <ClipLoader
+        color={"#f8b26a"}
+        loading={loadingState}
+        cssOverride={override}
+        size={350}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+        />
+    </div>
+        </div>
+        </>
+  );
+}
+
 
 export default loading;

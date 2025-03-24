@@ -51,7 +51,7 @@ const SearchPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {posts.length > 0 && (
             posts.map((post) => (
-              <div className="w-full overflow-hidden flex flex-col  bg-black lg:bg-white  shadow-md shadow-black hover:rounded-b-lg hover:shadow-2xl hover:-translate-y-2 duration-500">
+              <div key={post.postID} className="w-full overflow-hidden flex flex-col  bg-black lg:bg-white  shadow-md shadow-black hover:rounded-b-lg hover:shadow-2xl hover:-translate-y-2 duration-500">
                 <Link href={`/posts/${tagNames(post.title)}`}>
                   <Image
                     src={post.post_image}
