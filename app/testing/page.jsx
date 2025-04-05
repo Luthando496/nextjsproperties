@@ -44,6 +44,8 @@ const Testing = ({category}) => {
                   alt="Carousel Image"
                   layout="fill"
                   objectFit="cover"
+                  width={400}
+                  height={400}
                   className="top-0 z-[2]"
                 />
                 <div className="absolute z-[2] h-full w-full bg-black opacity-50 top-0 left-0"></div>
