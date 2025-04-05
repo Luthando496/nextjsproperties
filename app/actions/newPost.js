@@ -9,8 +9,9 @@ export const newPost = async (myData) => {
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from("images")
       .upload(fileName, myData.post_image);
-    if (myData.title.contains(":"))
-      myData.title = myData.title.replace(":","");
+      console.log(myData,"My Data Real")
+    // if (myData.title?.contains(":"))
+    //   myData.title = myData.title.replace(":","");
 
     if (uploadError) {
       console.error("File upload error:", uploadError.message);
