@@ -86,8 +86,8 @@ function MyEditor() {
       ) : ( */}
         <>
           <div className="px-40 mx-auto my-14">
-            {/* <ImagePicker location={"post"} myData={textData} setHandleImage={setImage} /> */}
-            <input type="file" name="image" onChange={(e)=> setImage(e.target.files[0])} id="image" />
+            <ImagePicker location={"post"} myData={textData} setHandleImage={setImage} />
+            {/* <input type="file" name="image" onChange={(e)=> setImage(e.target.files[0])} id="image" /> */}
           </div>
 
           <div className="px-24 my-4">

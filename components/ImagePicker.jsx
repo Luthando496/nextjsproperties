@@ -66,7 +66,7 @@ const ImagePicker = ({ setHandleImage, location }) => {
           loading
         </button>
       ) : (
-        uploadedImage && (
+        !uploadedImage && (
           <button
             onClick={handleSubmit}
             className="text-2xl w-48 btn_image hover:translate-y-2 duration-300 shadow-xl shadow-slate-300 font-light tracking-[2px] p-3 my-5 text-white bg-lime-500 rounded-lg"
