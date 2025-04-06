@@ -29,7 +29,7 @@ function MyEditor() {
     if (!user) return;
 
     const data = {
-      author: user.id, // Fix: use `user.id` instead of `user.user_id`
+      author: user?.user_metada?.full_name, 
       title,
       category,
       description: textData,
