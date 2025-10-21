@@ -1,59 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 export default function Loading() {
+  // You can adjust the number of skeleton cards by changing `Array(3)`
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      {/* Header Skeleton */}
-      <div className="mb-8">
-        <div className="h-8 bg-gray-200 rounded-lg w-1/3 mb-4 animate-pulse"></div>
-        <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
-      </div>
-
-      {/* Post Cards Skeleton */}
-      <div className="space-y-6">
-        {[...Array(3)].map((_, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-xl shadow-sm border border-gray-100 p-6"
+    <div className="w-full px-4 py-10 flex flex-col items-center space-y-6">
+      {/* Skeleton post cards */}
+      {Array(1)
+        .fill()
+        .map((_, i) => (
+          <div
+            key={i}
+            className="w-full max-w-3xl bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 animate-pulse"
           >
-            <div className="flex items-start space-x-4">
-              {/* Avatar Skeleton */}
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-gray-200 rounded-full animate-pulse"></div>
-              </div>
-              
-              {/* Content Skeleton */}
-              <div className="flex-1 space-y-3">
-                <div className="flex items-center space-x-2">
-                  <div className="h-4 bg-gray-200 rounded w-24 animate-pulse"></div>
-                  <div className="h-3 bg-gray-200 rounded w-16 animate-pulse"></div>
-                </div>
-                <div className="h-5 bg-gray-200 rounded w-3/4 animate-pulse"></div>
-                <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
-                <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
-                
-                {/* Tags Skeleton */}
-                <div className="flex space-x-2 pt-2">
-                  <div className="h-6 bg-gray-200 rounded-full w-16 animate-pulse"></div>
-                  <div className="h-6 bg-gray-200 rounded-full w-20 animate-pulse"></div>
-                </div>
-                
-                {/* Stats Skeleton */}
-                <div className="flex items-center space-x-4 pt-3">
-                  <div className="h-4 bg-gray-200 rounded w-12 animate-pulse"></div>
-                  <div className="h-4 bg-gray-200 rounded w-12 animate-pulse"></div>
-                  <div className="h-4 bg-gray-200 rounded w-12 animate-pulse"></div>
-                </div>
-              </div>
+            {/* Image placeholder */}
+            <div className="h-36 w-full bg-gray-200 dark:bg-gray-700 rounded-xl mb-5" />
+
+            {/* Title + metadata */}
+            <div className="h-5 w-3/4 bg-gray-200 dark:bg-gray-700 rounded mb-3" />
+            <div className="h-4 w-1/3 bg-gray-200 dark:bg-gray-700 rounded mb-5" />
+
+            {/* Content lines */}
+            <div className="space-y-2">
+              <div className="h-3 w-full bg-gray-200 dark:bg-gray-700 rounded" />
+              <div className="h-3 w-5/6 bg-gray-200 dark:bg-gray-700 rounded" />
+              <div className="h-3 w-4/5 bg-gray-200 dark:bg-gray-700 rounded" />
             </div>
-          </motion.div>
+          </div>
         ))}
-      </div>
     </div>
   );
 }
