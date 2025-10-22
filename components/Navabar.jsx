@@ -12,8 +12,10 @@ const Navbar = () => {
   );
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const getSession = async () => {
       await fetchUser();
     };
@@ -47,12 +49,56 @@ const Navbar = () => {
           {/* Logo */}
           <Link 
             href="/" 
-            className="text-2xl md:text-3xl font-bold tracking-tight hover:scale-105 transition-transform duration-200"
+            className="flex items-center gap-2 hover:scale-105 transition-transform duration-200"
           >
-            <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 bg-clip-text text-transparent">
-              Blog
+            <svg 
+              className="w-8 h-8 md:w-10 md:h-10" 
+              viewBox="0 0 24 24" 
+              fill="none"
+            >
+              {/* Book pages */}
+              <path 
+                d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" 
+                stroke="url(#gradient1)" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+              <path 
+                d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" 
+                stroke="url(#gradient1)" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+              {/* Pen/Feather */}
+              <path 
+                d="M12 6l4 4-8 8H4v-4l8-8z" 
+                fill="url(#gradient2)"
+                opacity="0.9"
+              />
+              <path 
+                d="M16 10l-4-4 1.5-1.5a2 2 0 0 1 2.828 0L17.5 5.672a2 2 0 0 1 0 2.828L16 10z" 
+                fill="url(#gradient2)"
+              />
+              
+              <defs>
+                <linearGradient id="gradient1" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#fbbf24" />
+                  <stop offset="1" stopColor="#f59e0b" />
+                </linearGradient>
+                <linearGradient id="gradient2" x1="4" y1="4" x2="16" y2="16" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#fcd34d" />
+                  <stop offset="1" stopColor="#fbbf24" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span className="text-xl md:text-2xl font-bold">
+              <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 bg-clip-text text-transparent">
+                Blog
+              </span>
+              <span className="text-white">2Go</span>
             </span>
-            <span className="text-white">2Go</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -90,7 +136,10 @@ const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            {!user ? (
+            {!mounted ? (
+              // Placeholder during SSR to prevent hydration mismatch
+              <div className="w-48 h-10"></div>
+            ) : !user ? (
               <>
                 <button
                   onClick={signGithub}
@@ -165,7 +214,10 @@ const Navbar = () => {
               
               {/* Mobile Auth */}
               <li className="px-6 py-4 border-t border-white/10 mt-2">
-                {!user ? (
+                {!mounted ? (
+                  // Placeholder during SSR
+                  <div className="w-full h-24"></div>
+                ) : !user ? (
                   <div className="flex flex-col gap-3">
                     <button
                       onClick={() => {

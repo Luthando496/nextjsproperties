@@ -28,7 +28,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <section className="flex justify-center mx-auto">
+      <section className="flex justify-center mx-auto ">
         <div className="flex gap-4 py-5">
           <input
             type="text"

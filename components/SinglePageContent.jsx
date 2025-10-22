@@ -12,7 +12,7 @@ const SinglePageContent = ({ post }) => {
   const titleTop = post.length > 20 ? post.title.slice(0, 20) : post.title;
 
   return (
-    <div className=" lg:max-w-[50%] mx-2 md:mx-7 lg:mx-auto overflow-hidden bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 mt-10">
+    <div className=" lg:max-w-[50%]  mx-2 md:mx-7 lg:mx-auto overflow-hidden bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 mt-10">
       {/* Breadcrumb Navigation */}
       <div className="py-4 pl-6 bg-black text-white w-full flex gap-4 items-center overflow-x-auto">
         <Link
