@@ -182,7 +182,7 @@ const SinglePost = async ({ params }) => {
 
             <p className="text-white/80 text-lg">
               Subscribe to our newsletter and get the latest articles delivered
-              straight to your inbox
+              straight to your inbox.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto mt-8">
