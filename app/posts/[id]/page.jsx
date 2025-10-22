@@ -33,7 +33,7 @@ const SinglePost = async ({ params }) => {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-24">
         <div className="text-center space-y-4">
           <div className="w-20 h-20 mx-auto bg-gradient-to-br from-purple-500 to-amber-500 rounded-full flex items-center justify-center">
             <svg
@@ -60,7 +60,7 @@ const SinglePost = async ({ params }) => {
   }
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 pt-20 md:pt-24">
       {/* Main Content */}
       <SinglePageContent post={post} />
 
