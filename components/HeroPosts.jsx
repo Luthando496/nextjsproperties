@@ -11,10 +11,10 @@ const HeroPosts = async() => {
     const {posts} = await getPosts();
   return (
     <>
-      <h1 className="text-center text-3xl font-bold mt-16">Latest Posts</h1>
+      <h1 id="latest" className="text-center text-3xl font-bold mt-16">Latest Posts</h1>
       <main className="grid grid-cols-1 relative lg:grid-cols-3 gap-20 px-8  lg:px-20 bg-white py-10">
         {/* left section */}
-        <section className="w-full space-y-5 col-span-1 lg:col-span-2">
+        <section className="w-full grid grid-cols-1 md:grid-cols-2 gap-3 space-y-5 col-span-1 lg:col-span-2">
           {/* single post */}
           {posts.length > 0 ? posts.map((post,index) =>{
            
